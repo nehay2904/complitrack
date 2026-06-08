@@ -1,0 +1,16 @@
+const express = require('express');
+const router = express.Router();
+const AlertLog = require('../models/AlertLog');
+const { protect, adminOnly } = require('../middleware/auth');
+
+// GET all alert logs (admin only)
+router.get('/', protect, adminOnly, async (req, res) => {
+  try {
+    const logs = await AlertLog.find().sort({ sentAt: -1 });
+    res.json(logs);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+module.exports = router;
