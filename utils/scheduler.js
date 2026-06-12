@@ -175,7 +175,7 @@ if (alreadyAlerted) continue;
 };
 
 // Runs every day at 10:00 AM IST
-cron.schedule('13 16 * * *', runAlertJob, {
+cron.schedule('22 16 * * *', runAlertJob, {
   timezone: 'Asia/Kolkata'
 });
 runAlertJob();
