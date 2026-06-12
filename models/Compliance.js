@@ -9,7 +9,7 @@ const complianceSchema = new mongoose.Schema({
   recurrence: { type: String },
   format: { type: String },
   dueDate: { type: String },
-  AlertDate: { type: String },
+  alertDate: { type: String },
   Signing_Authority: { type: mongoose.Schema.Types.ObjectId, ref: 'User', default: null },
   status: { type: String, enum: ['Pending', 'InProgress', 'Completed'], default: 'Pending' },
   completedDate: { type: Date, default: null },
