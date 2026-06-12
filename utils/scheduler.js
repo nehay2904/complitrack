@@ -48,22 +48,16 @@ const getReminderHTML = (compliance, type) => {
             <td style="padding: 10px; color: #666;">Title</td>
             <td style="padding: 10px;">${compliance.title}</td>
           </tr>
-          <tr style="border-bottom: 1px solid #eee;">
-            <td style="padding: 10px; color: #666;">Department</td>
-            <td style="padding: 10px;">${compliance.dept}</td>
-          </tr>
+       
           <tr style="border-bottom: 1px solid #eee;">
             <td style="padding: 10px; color: #666;">Due Date</td>
             <td style="padding: 10px; color: ${color}; font-weight: bold;">${compliance.dueDate}</td>
           </tr>
           <tr style="border-bottom: 1px solid #eee;">
             <td style="padding: 10px; color: #666;">Authority</td>
-            <td style="padding: 10px;">${compliance.authority}</td>
+            <td style="padding: 10px;">${compliance.Submission_Authority}</td>
           </tr>
-          <tr>
-            <td style="padding: 10px; color: #666;">Penalty</td>
-            <td style="padding: 10px; color: #E24B4A;">${compliance.penalty}</td>
-          </tr>
+    
         </table>
         <div style="margin-top: 24px; padding: 16px; background: #f9f9f9; border-radius: 4px;">
           <p style="margin: 0; font-size: 13px; color: #666;">Please log in to CompliTrack to update the status and upload completion proof.</p>
@@ -177,7 +171,7 @@ const runAlertJob = async () => {
 };
 
 // Runs every day at 10:00 AM IST
-cron.schedule('20 12 * * *', runAlertJob, {
+cron.schedule('0 14 * * *', runAlertJob, {
   timezone: 'Asia/Kolkata'
 });
 

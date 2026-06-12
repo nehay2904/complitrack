@@ -20,17 +20,17 @@ router.get('/', protect, async (req, res) => {
     if (req.query.type) filter.type = req.query.type;
     if (req.query.dept) filter.dept = req.query.dept;
     if (req.query.recurrence) filter.recurrence = req.query.recurrence;
-    const compliances = await Compliance.find(filter).populate('assignedTo', 'name email dept');
+    const compliances = await Compliance.find(filter).populate('Signing_Authority', 'name email dept');
     res.json(compliances);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 });
-
+/////////
 // GET single compliance
 router.get('/:id', protect, async (req, res) => {
   try {
-    const compliance = await Compliance.findById(req.params.id).populate('assignedTo', 'name email dept');
+    const compliance = await Compliance.findById(req.params.id).populate('Signing_Authority', 'name email dept');
     if (!compliance) return res.status(404).json({ message: 'Not found' });
     res.json(compliance);
   } catch (err) {
@@ -56,8 +56,8 @@ router.patch('/:id/assign', protect, adminOnly, async (req, res) => {
   try {
     const { userId } = req.body;
     const compliance = await Compliance.findByIdAndUpdate(
-      req.params.id, { assignedTo: userId }, { new: true }
-    ).populate('assignedTo', 'name email dept');
+      req.params.id, { Signing_Authority: userId }, { new: true }
+    ).populate('Signing_Authority', 'name email dept');
     res.json(compliance);
   } catch (err) {
     res.status(500).json({ message: err.message });

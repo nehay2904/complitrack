@@ -7,7 +7,7 @@ dotenv.config();
 
 const compliances = [ {
   "complianceId": "OSH-F1",
-  "type": "event",
+  "type": "recurring",
   "act": "OSH Rules 2026",
   "title": "Application for Registration of Establishment / Amendment",
   "detail": "An employer seeking registration for an establishment shall apply electronically in FORM-I containing the particulars of the establishment, accompanied by documents relating to registration of the establishment, proof of identity and address on the Shram Suvidha Portal or Portal as may be designated by the Central Government. Any change in particulars furnished in FORM-I shall be updated within 30 days of such change.",
