@@ -90,7 +90,7 @@ const runAlertJob = async () => {
 
     const compliances = await Compliance.find({
       status: { $ne: 'Completed' },
-      type: 'recurring'
+      type: { $in: ['recurring', 'event'] }
     }).populate('Signing_Authority', 'email name');
 
     let sentCount = 0;
@@ -174,5 +174,5 @@ const runAlertJob = async () => {
 cron.schedule('30 14 * * *', runAlertJob, {
   timezone: 'Asia/Kolkata'
 });
-
+runAlertJob();
 module.exports = { runAlertJob };
