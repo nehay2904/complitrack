@@ -91,7 +91,7 @@ const runAlertJob = async () => {
     const compliances = await Compliance.find({
       status: { $ne: 'Completed' },
       type: 'recurring'
-    }).populate('assignedTo', 'email name');
+    }).populate('Signing_Authority', 'email name');
 
     let sentCount = 0;
 
@@ -104,7 +104,7 @@ const runAlertJob = async () => {
       });
       if (alreadyAlerted) continue;
 
-      const assignedEmail = compliance.assignedTo?.email;
+      const assignedEmail = compliance.Signing_Authority?.email;
       const recipients = assignedEmail || adminEmails;
 
       const dueDate = new Date(compliance.dueDate);
@@ -171,7 +171,7 @@ const runAlertJob = async () => {
 };
 
 // Runs every day at 10:00 AM IST
-cron.schedule('20 14 * * *', runAlertJob, {
+cron.schedule('30 14 * * *', runAlertJob, {
   timezone: 'Asia/Kolkata'
 });
 
