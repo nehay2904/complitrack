@@ -78,5 +78,14 @@ router.post('/:id/upload', protect, upload.single('file'), async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
+// POST create new compliance (admin only)
+router.post('/', protect, adminOnly, async (req, res) => {
+  try {
+    const compliance = await Compliance.create(req.body);
+    res.status(201).json(compliance);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
 
 module.exports = router;
