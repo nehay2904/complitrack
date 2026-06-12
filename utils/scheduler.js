@@ -98,12 +98,15 @@ const runAlertJob = async () => {
 
     for (const compliance of compliances) {
 
-      // skip if already emailed today
-      const alreadyAlerted = await AlertLog.findOne({
-        complianceId: compliance.complianceId,
-        sentAt: { $gte: today }
-      });
-      if (alreadyAlerted) continue;
+   // NEW - checks per compliance correctly
+const alreadyAlerted = await AlertLog.findOne({
+  complianceId: compliance.complianceId,
+  sentAt: { 
+    $gte: new Date(today.getFullYear(), today.getMonth(), today.getDate(), 0, 0, 0),
+    $lt: new Date(today.getFullYear(), today.getMonth(), today.getDate(), 23, 59, 59)
+  }
+});
+if (alreadyAlerted) continue;
 
       const assignedEmail = compliance.Signing_Authority?.email;
       const recipients = assignedEmail || adminEmails;
@@ -172,7 +175,7 @@ const runAlertJob = async () => {
 };
 
 // Runs every day at 10:00 AM IST
-cron.schedule('50 15 * * *', runAlertJob, {
+cron.schedule('10 16 * * *', runAlertJob, {
   timezone: 'Asia/Kolkata'
 });
 runAlertJob();
