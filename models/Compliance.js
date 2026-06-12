@@ -6,16 +6,14 @@ const complianceSchema = new mongoose.Schema({
   act: { type: String },
   title: { type: String, required: true },
   detail: { type: String },
-  dept: { type: String },
   recurrence: { type: String },
+  format: { type: String },
   dueDate: { type: String },
-  alertDate: { type: String },
-  assignedTo: { type: mongoose.Schema.Types.ObjectId, ref: 'User', default: null },
+  AlertDate: { type: String },
+  Signing_Authority: { type: mongoose.Schema.Types.ObjectId, ref: 'User', default: null },
   status: { type: String, enum: ['Pending', 'InProgress', 'Completed'], default: 'Pending' },
   completedDate: { type: Date, default: null },
-  completionFile: { type: String, default: null },
-  authority: { type: String },
-  penalty: { type: String },
+  Submission_Authority : { type: String },
   clause: { type: String }
 }, { timestamps: true });
 
